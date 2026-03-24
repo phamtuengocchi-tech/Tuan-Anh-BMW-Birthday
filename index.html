@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Dinh Tuan Anh Pham 🎉</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+    }
+
+    /* 🎯 Sticker bay chậm + mượt */
+    .sticker {
+      position: fixed;
+      pointer-events: none;
+      animation: fly 4s linear forwards;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) rotate(720deg) scale(0.6);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center px-4">
+
+  <div class="bg-white shadow-2xl rounded-2xl p-6 sm:p-8 max-w-md w-full text-center">
+    
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-pink-500 mb-4">
+      Happy Birthday! 🎉
+    </h1>
+
+    <p class="text-base sm:text-lg text-gray-700 mb-6">
+      Tuổi mới chúc anh luôn sống trong tình yêu thương, tích cực và tràn ngập tiếng cười. Tuổi mới năng lượng mới cùng nhiều sức khỏe để đạt được nhiều dự định và thành công nha.  
+Hard work will pay off (and take your hair with it 😆). Chúc anh bắt đầu tuổi 25 bằng một kì Praktikum ở công ty anh yêu thích thật bùng nổ. PhD is waiting for you!!
+    </p>
+
+    <div class="text-5xl sm:text-6xl mb-6">🎉🎈🎁</div>
+
+    <p class="text-gray-600 italic text-sm sm:text-base">
+      "Sucess is great, but so is having hair"
+    </p>
+
+    <button onclick="celebrate()" 
+      class="mt-6 px-6 py-3 bg-pink-500 text-white rounded-xl shadow hover:bg-pink-600 transition">
+      Click for a Surprise 🎊
+    </button>
+
+    <p id="surprise" class="mt-4 text-lg font-semibold text-purple-600 hidden">
+      You are amazing! Have the best birthday ever! 💖
+    </p>
+
+  </div>
+
+  <script>
+    function createSticker() {
+      const stickers = [
+        "Sticker-removebg-preview.png",
+"sbmw.png"
+      ];
+
+      const img = document.createElement("img");
+      img.className = "sticker";
+
+      img.src = stickers[Math.floor(Math.random() * stickers.length)];
+
+      // 🎯 sticker to hơn
+      img.style.width = (50 + Math.random() * 60) + "px";
+
+      // 🎯 xuất hiện random khắp màn hình
+      const startX = Math.random() * window.innerWidth;
+      const startY = Math.random() * window.innerHeight;
+
+      img.style.left = startX + "px";
+      img.style.top = startY + "px";
+
+      // 🎯 bay nhẹ hơn (chậm + mượt)
+      const x = (Math.random() - 0.5) * 500 + "px";
+      const y = (Math.random() - 0.5) * 500 + "px";
+
+      img.style.setProperty("--x", x);
+      img.style.setProperty("--y", y);
+
+      document.body.appendChild(img);
+
+      setTimeout(() => {
+        img.remove();
+      }, 4000);
+    }
+
+    function celebrate() {
+      document.getElementById('surprise').classList.remove('hidden');
+
+      // confetti
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+
+      // 🎯 sticker bay ra nhiều hướng
+      for (let i = 0; i < 40; i++) {
+        setTimeout(createSticker, i * 80);
+      }
+    }
+  </script>
+
+</body>
+</html>
